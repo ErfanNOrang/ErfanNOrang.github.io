@@ -29,7 +29,8 @@ var SITE = {
   email: 'enorang@student.ysu.edu',
   scholar: 'https://scholar.google.com/citations?user=zrKHVW4AAAAJ&hl=en',
   linkedin: 'https://www.linkedin.com/in/erfan-nasirzadeh-orang/',
-  cv: 'cv.pdf',
+  cv: 'cv.pdf',            /* short CV, 2 pages */
+  cvFull: 'cv-full.pdf',    /* full CV, 4 pages */
   headshot: 'assets/headshot.jpg',
   notice: 'Presenting at IEEE VIS 2026 in Boston, Nov 9–13. If you\'ll be there, I\'d love to meet.',
   noticeUntil: '2026-11-14'   /* the notice hides itself from this date */

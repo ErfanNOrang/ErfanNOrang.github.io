@@ -59,7 +59,9 @@ a{color:inherit}
 .cv{position:absolute;left:91.5%;top:13%;transform:translate(-50%,-50%);width:9%;aspect-ratio:.78;border:2px solid #ddd;border-radius:10px;background:#141414;cursor:pointer;transition:transform .3s;display:block;opacity:0;animation:tileIn .7s 1.4s forwards}
 .cv:hover,.cv:focus-visible{transform:translate(-50%,-50%) scale(1.15);outline:none}
 .cv span{position:absolute;left:12%;right:12%;height:3%;background:#444;border-radius:2px}
-.cvlab{left:91.5%;top:27%;transform:translateX(-50%);font-size:clamp(14px,1.8vw,28px);white-space:nowrap}
+.cvlab{left:91.5%;top:27%;transform:translateX(-50%);font-size:clamp(14px,1.8vw,28px);white-space:nowrap;text-align:center}
+.cvlab .opts{display:block;margin-top:4px;font:clamp(10px,.9vw,13px) var(--mono);color:var(--ink2);pointer-events:auto}
+.cvlab .opts a{color:var(--ink2);text-underline-offset:3px}.cvlab .opts a:hover{color:var(--gold)}
 .gp{position:absolute;left:84%;top:44%;width:16%;pointer-events:none;opacity:0;animation:fade 1s 1.8s forwards}
 .formula{white-space:nowrap;left:93%;top:79%;transform:translateX(-50%);font-size:clamp(20px,2.8vw,44px);line-height:1;text-align:center;opacity:0;animation:fade 1s 2s forwards}
 .formula small{display:block;font-size:.5em;color:var(--ink2);margin-top:4px}
@@ -137,8 +139,8 @@ mark.needs{background:none;color:var(--gold);border-bottom:1px dashed var(--gold
     <svg class="venn" id="venn" viewBox="0 0 1000 800" aria-hidden="true"></svg>
     <svg class="arrowL" viewBox="0 0 140 60" aria-hidden="true"><path d="M4 18 C 40 8, 80 30, 128 40" fill="none" stroke="#f4f1ea" stroke-width="2.4" stroke-linecap="round"/><path d="M112 30 L130 41 L114 52" fill="none" stroke="#f4f1ea" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div class="deco hint">Click around to<br>explore my<br>work!</div>
-    <a class="cv" id="cvlink" href="cv.pdf" aria-label="Open my CV (PDF)"></a>
-    <div class="deco cvlab">My CV</div>
+    <a class="cv" id="cvlink" href="cv.pdf" aria-label="Open my short CV (PDF)"></a>
+    <div class="deco cvlab">My CV<span class="opts"><a id="cvShort" href="cv.pdf">short</a> · <a id="cvFull" href="cv-full.pdf">full</a></span></div>
     <svg class="gp" viewBox="0 0 160 110" aria-hidden="true">
       <path d="M6 60 C 30 20, 50 25, 70 55 S 120 95, 154 40 L154 70 C 120 120, 90 90, 70 80 S 30 50, 6 90 Z" fill="rgba(231,194,107,.18)" stroke="none"/>
       <path d="M6 75 C 30 35, 50 40, 70 67 S 120 108, 154 55" fill="none" stroke="#f4f1ea" stroke-width="2.4" stroke-linecap="round"/>
@@ -182,8 +184,8 @@ $('hello').innerHTML=SITE.hello.map(function(l){return '<span>'+esc(l)+'</span>'
 $('sub').textContent=SITE.sub; $('ket').textContent=SITE.ket;
 $('name').textContent=SITE.name; $('seek').textContent=SITE.seeking; $('notice').textContent=(!SITE.noticeUntil||new Date()<new Date(SITE.noticeUntil))?SITE.notice:'';
 if(SITE.headshot){$('photo').innerHTML='<img src="'+esc(SITE.headshot)+'" alt="'+esc(SITE.name)+'">';}
-$('links').innerHTML=[['Email','mailto:'+SITE.email],['CV',SITE.cv],['Google Scholar',SITE.scholar],['LinkedIn',SITE.linkedin]].map(function(l){var ext=/^https?:/.test(l[1]);return '<a href="'+esc(l[1])+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+l[0]+'</a>';}).join('');
-$('cvlink').href=SITE.cv;
+$('links').innerHTML=[['Email','mailto:'+SITE.email],['Short CV',SITE.cv],['Full CV',SITE.cvFull],['Google Scholar',SITE.scholar],['LinkedIn',SITE.linkedin]].map(function(l){var ext=/^https?:/.test(l[1]);return '<a href="'+esc(l[1])+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+l[0]+'</a>';}).join('');
+$('cvlink').href=SITE.cv;$('cvShort').href=SITE.cv;$('cvFull').href=SITE.cvFull;
 var cv=$('cvlink'); for(var i=0;i<9;i++){var s=document.createElement('span');s.style.top=(12+i*8.5)+'%';s.style.right=(12+(i%3)*10)+'%';cv.appendChild(s);}
 
 /* hand-drawn doodles (black ink on the white tiles) */
