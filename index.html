@@ -179,7 +179,7 @@ var $=function(id){return document.getElementById(id);};
 /* left column */
 $('hello').innerHTML=SITE.hello.map(function(l){return '<span>'+esc(l)+'</span>';}).join('');
 $('sub').textContent=SITE.sub; $('ket').textContent=SITE.ket;
-$('name').textContent=SITE.name; $('seek').textContent=SITE.seeking; $('notice').textContent=SITE.notice;
+$('name').textContent=SITE.name; $('seek').textContent=SITE.seeking; $('notice').textContent=(!SITE.noticeUntil||new Date()<new Date(SITE.noticeUntil))?SITE.notice:'';
 if(SITE.headshot){$('photo').innerHTML='<img src="'+esc(SITE.headshot)+'" alt="'+esc(SITE.name)+'">';}
 $('links').innerHTML=[['Email','mailto:'+SITE.email],['CV',SITE.cv],['Google Scholar',SITE.scholar],['LinkedIn',SITE.linkedin]].map(function(l){var ext=/^https?:/.test(l[1]);return '<a href="'+esc(l[1])+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+l[0]+'</a>';}).join('');
 $('cvlink').href=SITE.cv;

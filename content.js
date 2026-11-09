@@ -30,8 +30,9 @@ var SITE = {
   scholar: 'https://scholar.google.com/citations?user=zrKHVW4AAAAJ&hl=en',
   linkedin: 'https://www.linkedin.com/in/erfan-nasirzadeh-orang/',
   cv: 'cv.pdf',
-  headshot: '',          /* NEEDS: put your photo at assets/headshot.jpg and write 'assets/headshot.jpg' here */
-  notice: 'Presenting at IEEE VIS 2026 in Boston, Nov 9–13. If you\'ll be there, I\'d love to meet.'
+  headshot: 'assets/headshot.jpg',
+  notice: 'Presenting at IEEE VIS 2026 in Boston, Nov 9–13. If you\'ll be there, I\'d love to meet.',
+  noticeUntil: '2026-11-14'   /* the notice hides itself from this date */
 };
 
 var TILES = [
