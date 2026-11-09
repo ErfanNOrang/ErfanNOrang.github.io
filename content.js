@@ -22,7 +22,7 @@ var VENN = {
 var SITE = {
   name: 'Erfan Nasirzadeh Orang',
   shortName: 'Erfan Orang',
-  hello: ['I am a', 'Scientific ML', 'Researcher'],
+  hello: ['I work at the intersection of', 'Visualization', '& Machine Learning'],
   ket: '|PHYS⟩ + |ML⟩ + |VIS⟩',
   sub: 'expertise as an interdisciplinary scientist',
   seeking: 'Seeking a PhD position · Fall 2027 or Spring 2028',
