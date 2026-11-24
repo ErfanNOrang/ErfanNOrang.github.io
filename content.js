@@ -24,7 +24,7 @@ var SITE = {
   shortName: 'Erfan Orang',
   hello: ['I work at the intersection of', 'Visualization', '& Machine Learning'],
   ket: '|PHYS⟩ + |ML⟩ + |VIS⟩',
-  sub: 'expertise as an interdisciplinary scientist',
+  sub: 'I enjoy being an interdisciplinary scientist',
   seeking: 'Seeking a PhD position · Fall 2027 or Spring 2028',
   email: 'enorang@student.ysu.edu',
   scholar: 'https://scholar.google.com/citations?user=zrKHVW4AAAAJ&hl=en',
@@ -74,7 +74,7 @@ var TILES = [
       links:[] } },
 
   /* ML + Vis */
-  { id:'tribe', zone:'MV', x:500, y:628, doodle:'brain', title:'Brain Model vs fMRI', tag:'IEEE VIS 2026',
+  { id:'tribe', zone:'MV', x:500, y:628, big:true, doodle:'brain', title:'Brain Model vs fMRI', tag:'IEEE VIS 2026',
     panel:{ area:'Visualization & neuro ML · 2026–', q:"Can a neural encoding model (Meta's TRIBE v2) replicate a published fMRI study of how people perceive visualizations?",
       did:'First author, with Dr. Zack While. I compared TRIBE v2\'s predicted cortical responses with the human results, using PyTorch on an HPC cluster.',
       found:'TRIBE v2 matched the direction of 11 of 14 reported effects, concentrated in visual regions. Talk at VISxVISION and an invited poster at IEEE VIS 2026.',

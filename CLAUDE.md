@@ -7,7 +7,7 @@ The site's job: help Erfan Nasirzadeh Orang get a funded PhD starting Fall 2027 
 - Live design: wv7 "Venn" (made in a claude.ai chat). Projects are hand-drawn tiles on a Physics / Machine Learning / Visualization Venn diagram; each opens a drawer (question, what I did, what came out of it). On phones the tiles become numbered dots with a card list below.
 - No build step, no frameworks. Edit text in `content.js`, not in `index.html`.
 - Fonts: DM Serif Display, Caveat (hand-drawn labels), JetBrains Mono. Dark only.
-- Credit (footer and README): layout and interaction concept inspired by James Saslow's portfolio (jamessaslow.github.io). Keep it.
+- Credit (README only, not on the page): layout and interaction concept inspired by James Saslow's portfolio (jamessaslow.github.io). Keep it.
 - Archived, not public: everything in `../design/` (see `../design/CATALOG.md`); the previous glass site is `../design/v4/` with the full content data.
 - Public build: `NEEDS:` text in content.js is hidden on the page (never shown to visitors); a drawer section with nothing confirmed is hidden.
 

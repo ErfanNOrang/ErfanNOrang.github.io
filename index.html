@@ -40,8 +40,15 @@ a{color:inherit}
 .links a:hover{color:var(--ink)}
 .mail{margin:10px 0 0;font-size:13px}
 .mail a{color:var(--ink);text-underline-offset:3px}
-.credit{margin-top:6px}
-.credit a{color:var(--ink3)}
+/* desktop only: the featured tile is larger; scrolling glides between the
+   Venn page and the papers page (see the script at the end) */
+@media (min-width:861px){
+  .tile.big{width:17%;height:19.25%;z-index:2}
+  .tile.big b{font-size:clamp(12px,1.6vw,24px)}
+  html{scroll-snap-type:y proximity}
+  .page,.more{scroll-snap-align:start}
+  .more{min-height:100svh;box-sizing:border-box}
+}
 /* stage */
 .stage{position:relative;width:100%;max-width:1150px;aspect-ratio:1000/800;justify-self:center}
 .stage svg.venn{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
@@ -59,14 +66,14 @@ a{color:inherit}
 .tile i{white-space:nowrap;font-style:normal;font-family:var(--mono);font-size:clamp(6.5px,.62vw,10px);letter-spacing:.06em;text-transform:uppercase;color:#555}
 .tile.soon{border-style:dashed}
 .deco{position:absolute;pointer-events:none;font-family:var(--hand);color:var(--ink)}
-.hint{left:0;top:27%;transform:rotate(-8deg);font-size:clamp(16px,2vw,30px);line-height:1.05;text-align:center;opacity:0;animation:fade 1s 1.6s forwards}
+.hint{left:0;top:12%;transform:rotate(-8deg);font-size:clamp(16px,2vw,30px);line-height:1.05;text-align:center;opacity:0;animation:fade 1s 1.6s forwards}
 .cv{position:absolute;left:91.5%;top:13%;transform:translate(-50%,-50%);width:9%;aspect-ratio:.78;border:2px solid #ddd;border-radius:10px;background:#141414;cursor:pointer;transition:transform .3s;display:block;opacity:0;animation:tileIn .7s 1.4s forwards}
 .cv:hover,.cv:focus-visible{transform:translate(-50%,-50%) scale(1.15);outline:none}
 .cv span{position:absolute;left:12%;right:12%;height:3%;background:#444;border-radius:2px}
 .cvlab{left:91.5%;top:27%;transform:translateX(-50%);font-size:clamp(14px,1.8vw,28px);white-space:nowrap;text-align:center}
 .cvlab .opts{display:block;margin-top:4px;font:clamp(10px,.9vw,13px) var(--mono);color:var(--ink2);pointer-events:auto}
 .cvlab .opts a{color:var(--ink2);text-underline-offset:3px}.cvlab .opts a:hover{color:var(--gold)}
-.arrowL{position:absolute;left:-1%;top:44%;width:13%;pointer-events:none;opacity:0;animation:fade 1s 1.7s forwards}
+.arrowL{position:absolute;left:-1%;top:29%;width:13%;pointer-events:none;opacity:0;animation:fade 1s 1.7s forwards}
 /* drawer */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
 .scrim.on{opacity:1;pointer-events:auto}
@@ -151,7 +158,6 @@ mark.needs{background:none;color:var(--gold);border-bottom:1px dashed var(--gold
   <h4>Papers</h4>
   <ul class="pubs" id="pubs"></ul>
   <p class="foot">© 2026 Erfan Nasirzadeh Orang · Last updated November 2026</p>
-  <p class="foot credit">Layout and interaction concept inspired by <a href="https://jamessaslow.github.io" target="_blank" rel="noopener">James Saslow's portfolio</a>. Content, project illustrations and text are my own.</p>
 </section>
 </main>
 
@@ -216,7 +222,7 @@ v.innerHTML=h;
 /* tiles */
 var stage=$('stage'), rots=[-3,2,-2,3,-1,2,-3,1,-2,3,-1];
 TILES.forEach(function(t,i){
-  var b=document.createElement('button');b.className='tile'+(t.tag==='upcoming'?' soon':'');
+  var b=document.createElement('button');b.className='tile'+(t.tag==='upcoming'?' soon':'')+(t.big?' big':'');
   b.style.left=(t.x/10)+'%';b.style.top=(t.y/8)+'%';b.style.setProperty('--rot',rots[i%rots.length]+'deg');b.style.setProperty('--d',(0.5+i*0.07)+'s');
   b.dataset.n=i+1;b.setAttribute('aria-label',t.title+', '+t.tag+'. Open details.');
   b.innerHTML='<b>'+esc(t.title)+'</b>'+doodle(t.doodle)+'<i>'+esc(t.tag)+'</i>';
@@ -251,6 +257,33 @@ var PUBS=[
  ['Chirp asymmetry in Zeeman electromagnetically induced transparency','J. Gorkos, K. Grenzig, E. Nasirzadeh Orang, V. Thomas, D. Tighe, M. Crescimanno','JOSA B 42(2), 404–411 (2025)','https://doi.org/10.1364/JOSAB.544782']
 ];
 $('pubs').innerHTML=PUBS.map(function(p){return '<li><b class="t">'+esc(p[0])+'</b>'+esc(p[1]).replace('E. Nasirzadeh Orang','<b class="me">E. Nasirzadeh Orang</b>')+'<br>'+esc(p[2])+(p[3]?' · <a href="'+esc(p[3])+'" target="_blank" rel="noopener">link ↗</a>':'')+'</li>';}).join('');
+})();
+
+/* Desktop: one scroll down on the Venn page glides to the papers page, and one
+   scroll up at the top of the papers page glides back. Inside the papers page,
+   scrolling is normal. */
+(function(){
+  var desk=matchMedia('(min-width:861px)'), still=matchMedia('(prefers-reduced-motion: reduce)');
+  var more=document.querySelector('.more'), busy=false;
+  function top2(){return Math.round(more.getBoundingClientRect().top+scrollY);}
+  function go(y){busy=true;scrollTo({top:y,behavior:still.matches?'auto':'smooth'});setTimeout(function(){busy=false;},900);}
+  /* dy: how far this scroll would move. Going up across the papers' top edge glides to the Venn page. */
+  function step(dy){
+    var t=top2(), y=scrollY;
+    if(dy>0&&y<t-2){go(t);return true;}
+    if(dy<0&&y>0&&y+dy<=t+2){go(0);return true;}
+    return false;
+  }
+  addEventListener('wheel',function(e){
+    if(!desk.matches||document.getElementById('drawer').classList.contains('on')||Math.abs(e.deltaY)<4)return;
+    if(busy){e.preventDefault();return;}
+    if(step(e.deltaY))e.preventDefault();
+  },{passive:false});
+  addEventListener('keydown',function(e){
+    if(!desk.matches||busy||document.getElementById('drawer').classList.contains('on'))return;
+    var d={ArrowDown:40,PageDown:innerHeight,' ':innerHeight,ArrowUp:-40,PageUp:-innerHeight}[e.key];
+    if(d&&!/INPUT|TEXTAREA|BUTTON/.test((e.target.tagName||''))&&step(d))e.preventDefault();
+  });
 })();
 </script>
 </body>
