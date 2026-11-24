@@ -65,10 +65,6 @@ var TILES = [
       did:'Contributing author: uncertainty-aware surrogate modeling of the turbine simulations.',
       found:'Accepted at Part A: Journal of Power and Energy.',
       links:[['Request a copy','mailto:enorang@student.ysu.edu']] } },
-  { id:'femvib', zone:'PM', x:432, y:350, doodle:'solver', title:'FEMvib (soon)', tag:'upcoming',
-    panel:{ area:'Scientific ML · upcoming', q:'Where can we trust the predictions of a finite-element vibrational solver?',
-      did:'An upcoming collaboration with Dr. Andrew Cooksy (SDSU) on uncertainty in FEMvib, an open-source finite-element vibrational solver.',
-      found:'Upcoming.', links:[] } },
 
   /* Physics + Vis */
   { id:'imaging', zone:'PV', x:700, y:360, doodle:'micro', title:'Nanoscale Imaging', tag:'AFM · SEM · TEM',

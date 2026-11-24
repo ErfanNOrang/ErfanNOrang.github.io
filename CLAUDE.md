@@ -7,6 +7,7 @@ The site's job: help Erfan Nasirzadeh Orang get a funded PhD starting Fall 2027 
 - Live design: wv7 "Venn" (made in a claude.ai chat). Projects are hand-drawn tiles on a Physics / Machine Learning / Visualization Venn diagram; each opens a drawer (question, what I did, what came out of it). On phones the tiles become numbered dots with a card list below.
 - No build step, no frameworks. Edit text in `content.js`, not in `index.html`.
 - Fonts: DM Serif Display, Caveat (hand-drawn labels), JetBrains Mono. Dark only.
+- Credit (footer and README): layout and interaction concept inspired by James Saslow's portfolio (jamessaslow.github.io). Keep it.
 - Archived, not public: everything in `../design/` (see `../design/CATALOG.md`); the previous glass site is `../design/v4/` with the full content data.
 - Public build: `NEEDS:` text in content.js is hidden on the page (never shown to visitors); a drawer section with nothing confirmed is hidden.
 
@@ -33,7 +34,7 @@ Each project: Question → What I did (his part specifically) → What we found 
 - Author lists match each paper's own listing; bold Erfan. SPIE lists "A. Fiorito III". "R. Sheffield" on the EGLS abstract is D. R. Sheffield.
 - Label roles honestly: "First author" or "Contributing author". Middle-author work is described by his part, never as his own paper.
 - Dr. Kyosung Choo is the PI on the JTAC and wind-turbine papers; day-to-day work was with his PhD students. Do not call Choo a mentor.
-- FEMvib: only "upcoming collaboration with Dr. Andrew Cooksy (SDSU)". No results, no "starting".
+- FEMvib / Dr. Andrew Cooksy: removed (the collaboration never happened). Do not mention it.
 - Availability: "available to start Fall 2027 or Spring 2028". No M.S. finish date.
 - Areas: Scientific ML & uncertainty · Visualization & neuro ML · Photonics. "Computational imaging" appears only inside the vis and photonics sections. Quantum optics is supporting background, listed last.
 - Figures: arXiv paper figures are his to use. Scientific Reports is CC BY (credit it). JOSA B, JTAC and SPIE figures must be re-plotted or skipped.

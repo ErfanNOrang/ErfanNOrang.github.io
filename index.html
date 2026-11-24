@@ -38,6 +38,10 @@ a{color:inherit}
 .links{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;font-size:13px}
 .links a{color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
 .links a:hover{color:var(--ink)}
+.mail{margin:10px 0 0;font-size:13px}
+.mail a{color:var(--ink);text-underline-offset:3px}
+.credit{margin-top:6px}
+.credit a{color:var(--ink3)}
 /* stage */
 .stage{position:relative;width:100%;max-width:1150px;aspect-ratio:1000/800;justify-self:center}
 .stage svg.venn{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
@@ -55,16 +59,13 @@ a{color:inherit}
 .tile i{white-space:nowrap;font-style:normal;font-family:var(--mono);font-size:clamp(6.5px,.62vw,10px);letter-spacing:.06em;text-transform:uppercase;color:#555}
 .tile.soon{border-style:dashed}
 .deco{position:absolute;pointer-events:none;font-family:var(--hand);color:var(--ink)}
-.hint{left:9%;top:11%;transform:rotate(-14deg);font-size:clamp(16px,2vw,30px);line-height:1.05;text-align:center;opacity:0;animation:fade 1s 1.6s forwards}
+.hint{left:0;top:27%;transform:rotate(-8deg);font-size:clamp(16px,2vw,30px);line-height:1.05;text-align:center;opacity:0;animation:fade 1s 1.6s forwards}
 .cv{position:absolute;left:91.5%;top:13%;transform:translate(-50%,-50%);width:9%;aspect-ratio:.78;border:2px solid #ddd;border-radius:10px;background:#141414;cursor:pointer;transition:transform .3s;display:block;opacity:0;animation:tileIn .7s 1.4s forwards}
 .cv:hover,.cv:focus-visible{transform:translate(-50%,-50%) scale(1.15);outline:none}
 .cv span{position:absolute;left:12%;right:12%;height:3%;background:#444;border-radius:2px}
 .cvlab{left:91.5%;top:27%;transform:translateX(-50%);font-size:clamp(14px,1.8vw,28px);white-space:nowrap;text-align:center}
 .cvlab .opts{display:block;margin-top:4px;font:clamp(10px,.9vw,13px) var(--mono);color:var(--ink2);pointer-events:auto}
 .cvlab .opts a{color:var(--ink2);text-underline-offset:3px}.cvlab .opts a:hover{color:var(--gold)}
-.gp{position:absolute;left:84%;top:44%;width:16%;pointer-events:none;opacity:0;animation:fade 1s 1.8s forwards}
-.formula{white-space:nowrap;left:93%;top:79%;transform:translateX(-50%);font-size:clamp(20px,2.8vw,44px);line-height:1;text-align:center;opacity:0;animation:fade 1s 2s forwards}
-.formula small{display:block;font-size:.5em;color:var(--ink2);margin-top:4px}
 .arrowL{position:absolute;left:-1%;top:44%;width:13%;pointer-events:none;opacity:0;animation:fade 1s 1.7s forwards}
 /* drawer */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
@@ -106,7 +107,7 @@ mark.needs{background:none;color:var(--gold);border-bottom:1px dashed var(--gold
   .tile{width:7.5%;aspect-ratio:1;border-radius:50%;padding:0;justify-content:center}
   .tile b,.tile svg,.tile i{display:none}
   .tile:after{content:attr(data-n);font:700 11px var(--mono)}
-  .hint,.gp,.formula,.arrowL{display:none}
+  .hint,.arrowL{display:none}
   .cv,.cvlab{display:none}
   .vlabel{font-size:26px}.vcenter{font-size:22px}
   .list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -118,7 +119,7 @@ mark.needs{background:none;color:var(--gold);border-bottom:1px dashed var(--gold
   .list button i{font-style:normal;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#555}
   .list button span{font:700 10px var(--mono);color:#888}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hello span,.tile,.hint,.cv,.gp,.formula,.arrowL,.venn circle{opacity:1!important;transform:none}.tile{transform:translate(-50%,-50%)}.cv{transform:translate(-50%,-50%)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hello span,.tile,.hint,.cv,.arrowL,.venn circle{opacity:1!important;transform:none}.tile{transform:translate(-50%,-50%)}.cv{transform:translate(-50%,-50%)}}
 </style>
 </head>
 <body>
@@ -134,6 +135,7 @@ mark.needs{background:none;color:var(--gold);border-bottom:1px dashed var(--gold
     <span class="seek" id="seek"></span>
     <p class="notice" id="notice"></p>
     <div class="links" id="links"></div>
+    <p class="mail" id="mail"></p>
   </div>
   <div class="stage" id="stage">
     <svg class="venn" id="venn" viewBox="0 0 1000 800" aria-hidden="true"></svg>
@@ -141,12 +143,6 @@ mark.needs{background:none;color:var(--gold);border-bottom:1px dashed var(--gold
     <div class="deco hint">Click around to<br>explore my<br>work!</div>
     <a class="cv" id="cvlink" href="cv.pdf" aria-label="Open my short CV (PDF)"></a>
     <div class="deco cvlab">My CV<span class="opts"><a id="cvShort" href="cv.pdf">short</a> · <a id="cvFull" href="cv-full.pdf">full</a></span></div>
-    <svg class="gp" viewBox="0 0 160 110" aria-hidden="true">
-      <path d="M6 60 C 30 20, 50 25, 70 55 S 120 95, 154 40 L154 70 C 120 120, 90 90, 70 80 S 30 50, 6 90 Z" fill="rgba(231,194,107,.18)" stroke="none"/>
-      <path d="M6 75 C 30 35, 50 40, 70 67 S 120 108, 154 55" fill="none" stroke="#f4f1ea" stroke-width="2.4" stroke-linecap="round"/>
-      <g fill="#f4f1ea"><circle cx="22" cy="55" r="4"/><circle cx="70" cy="67" r="4"/><circle cx="112" cy="90" r="4"/></g>
-    </svg>
-    <div class="deco formula">μ ± 2σ<small>trust, with error bars</small></div>
   </div>
 </section>
 
@@ -155,6 +151,7 @@ mark.needs{background:none;color:var(--gold);border-bottom:1px dashed var(--gold
   <h4>Papers</h4>
   <ul class="pubs" id="pubs"></ul>
   <p class="foot">© 2026 Erfan Nasirzadeh Orang · Last updated November 2026</p>
+  <p class="foot credit">Layout and interaction concept inspired by <a href="https://jamessaslow.github.io" target="_blank" rel="noopener">James Saslow's portfolio</a>. Content, project illustrations and text are my own.</p>
 </section>
 </main>
 
@@ -185,6 +182,7 @@ $('sub').textContent=SITE.sub; $('ket').textContent=SITE.ket;
 $('name').textContent=SITE.name; $('seek').textContent=SITE.seeking; $('notice').textContent=(!SITE.noticeUntil||new Date()<new Date(SITE.noticeUntil))?SITE.notice:'';
 if(SITE.headshot){$('photo').innerHTML='<img src="'+esc(SITE.headshot)+'" alt="'+esc(SITE.name)+'">';}
 $('links').innerHTML=[['Email','mailto:'+SITE.email],['Short CV',SITE.cv],['Full CV',SITE.cvFull],['Google Scholar',SITE.scholar],['LinkedIn',SITE.linkedin]].map(function(l){var ext=/^https?:/.test(l[1]);return '<a href="'+esc(l[1])+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+l[0]+'</a>';}).join('');
+$('mail').innerHTML='<a href="mailto:'+esc(SITE.email)+'">'+esc(SITE.email)+'</a>';
 $('cvlink').href=SITE.cv;$('cvShort').href=SITE.cv;$('cvFull').href=SITE.cvFull;
 var cv=$('cvlink'); for(var i=0;i<9;i++){var s=document.createElement('span');s.style.top=(12+i*8.5)+'%';s.style.right=(12+(i%3)*10)+'%';cv.appendChild(s);}
 
