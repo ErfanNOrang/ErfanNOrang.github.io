@@ -60,11 +60,11 @@ var TILES = [
       did:"In Dr. Kyosung Choo's group, working with his PhD students: XGBoost, random forest and Gaussian process regression on simulation data, with SHAP and nested cross-validation.",
       found:'A four-model benchmark with GPR for uncertainty and SHAP for attribution (Journal of Thermal Analysis and Calorimetry, 2026).',
       links:[['Paper','https://doi.org/10.1007/s10973-026-16179-8']] } },
-  { id:'wind', zone:'PM', x:300, y:458, doodle:'turbine', title:'Wind Turbines', tag:'accepted',
+  { id:'wind', zone:'PM', x:300, y:458, doodle:'turbine', title:'Wind Turbines', tag:'Proc. IMechE 2026',
     panel:{ area:'Scientific ML · 2026', q:'How do turbulence effects on an H-type Darrieus vertical-axis wind turbine depend on operating regime?',
       did:'Contributing author: uncertainty-aware surrogate modeling of the turbine simulations.',
-      found:'Accepted at Part A: Journal of Power and Energy.',
-      links:[['Request a copy','mailto:enorang@student.ysu.edu']] } },
+      found:'Published online in Proceedings of the Institution of Mechanical Engineers, Part A: Journal of Power and Energy (Nov 2026).',
+      links:[['Paper','https://doi.org/10.1177/09576509261508217']] } },
 
   /* Physics + Vis */
   { id:'imaging', zone:'PV', x:700, y:360, doodle:'micro', title:'Nanoscale Imaging', tag:'AFM · SEM · TEM',
@@ -77,8 +77,8 @@ var TILES = [
   { id:'tribe', zone:'MV', x:500, y:628, big:true, doodle:'brain', title:'Brain Model vs fMRI', tag:'IEEE VIS 2026',
     panel:{ area:'Visualization & neuro ML · 2026–', q:"Can a neural encoding model (Meta's TRIBE v2) replicate a published fMRI study of how people perceive visualizations?",
       did:'First author, with Dr. Zack While. I compared TRIBE v2\'s predicted cortical responses with the human results, using PyTorch on an HPC cluster.',
-      found:'TRIBE v2 matched the direction of 11 of 14 reported effects, concentrated in visual regions. Talk at VISxVISION and an invited poster at IEEE VIS 2026.',
-      links:[['arXiv','https://arxiv.org/abs/2609.15685'],['VIS program','https://ieeevis.org/year/2026/program/paper/3b9c6999-3420-49c7-a24f-92a1edc21f2a/'],['Supplemental','https://osf.io/8a96x/']] } },
+      found:'TRIBE v2 matched the direction of 11 of 14 reported effects, concentrated in visual regions. Presented at the VISxVISION workshop at IEEE VIS 2026 in Boston (Nov 9), with an invited poster at the main conference.',
+      links:[['arXiv','https://arxiv.org/abs/2609.15685'],['VIS program','https://wl.ieeevis.org/year/2026/program/content/3b9c6999-3420-49c7-a24f-92a1edc21f2a/'],['Supplemental','https://osf.io/8a96x/']] } },
 
   /* ML only */
   { id:'reu', zone:'M', x:212, y:598, doodle:'ot', title:'Optimal Transport', tag:'Williams REU 2024',

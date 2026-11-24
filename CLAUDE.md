@@ -31,7 +31,7 @@ Each project: Question → What I did (his part specifically) → What we found 
 - Gaps are written as `{{NEEDS: ...}}` in `content.js`. They render as gold dashed markers and are counted in the draft badge (bottom left). Don't send the link anywhere until the badge is gone. Things with no spot on the page go in `SITE.pending`.
 - Kept out until Erfan confirms: "thesis-based", "presented to university leadership", the REU "12%" figure, "1,200+ students", the Nov 19 YSU Showcase talk.
 - Never show citation counts or h-index.
-- Author lists match each paper's own listing; bold Erfan. SPIE lists "A. Fiorito III". "R. Sheffield" on the EGLS abstract is D. R. Sheffield.
+- Author lists match each paper's own listing; bold Erfan. Fiorito: "A. Fiorito III" on Scientific Reports, "A. Fiorito" (no III) on the SPIE paper, as Crossref lists them. "R. Sheffield" on the EGLS abstract is D. R. Sheffield.
 - Label roles honestly: "First author" or "Contributing author". Middle-author work is described by his part, never as his own paper.
 - Dr. Kyosung Choo is the PI on the JTAC and wind-turbine papers; day-to-day work was with his PhD students. Do not call Choo a mentor.
 - FEMvib / Dr. Andrew Cooksy: removed (the collaboration never happened). Do not mention it.

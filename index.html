@@ -24,7 +24,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--mono);ov
 a{color:inherit}
 .page{min-height:100svh;display:grid;grid-template-columns:minmax(300px,32%) 1fr;align-items:center;gap:0;padding:24px max(24px,env(safe-area-inset-right)) 24px max(24px,env(safe-area-inset-left))}
 /* left */
-.hello{font-family:var(--serif);font-weight:400;font-size:clamp(22px,2vw,32px);line-height:1;margin:0;letter-spacing:-.01em}
+.hello{font-family:var(--serif);font-weight:400;font-size:clamp(24px,min(2.3vw,4.4vh),38px);line-height:1;margin:0;letter-spacing:-.01em}
 .hello span{display:block;opacity:0;transform:translateY(14px);animation:up .9s cubic-bezier(.2,.7,.1,1) forwards}
 .hello span:nth-child(2){animation-delay:.12s}.hello span:nth-child(3){animation-delay:.24s}
 .sub{margin:22px 0 4px;font-size:15px;letter-spacing:.04em;font-weight:700}
@@ -45,9 +45,24 @@ a{color:inherit}
 @media (min-width:861px){
   .tile.big{width:17%;height:19.25%;z-index:2}
   .tile.big b{font-size:clamp(12px,1.6vw,24px)}
-  html{scroll-snap-type:y proximity}
-  .page,.more{scroll-snap-align:start}
   .more{min-height:100svh;box-sizing:border-box}
+  /* keep the first page inside the window: the Venn diagram is capped by the window height */
+  .page .stage{max-width:min(1150px,calc((100svh - 48px)*1.25))}
+  /* the section being left fades and sinks back; the next one rises in */
+  .page,.more{transition:opacity .75s ease,transform .9s cubic-bezier(.2,.7,.1,1)}
+  .leaving{opacity:.08;transform:scale(.94)}
+  .entering{animation:rise 1s cubic-bezier(.2,.7,.1,1)}
+  @keyframes rise{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+}
+/* short desktop windows (laptops with browser bars): smaller photo and tighter gaps */
+@media (min-width:861px) and (max-height:780px){
+  .sub{margin-top:14px}
+  .me{margin-top:16px}
+  .photo{height:150px;width:128px}
+  .name{margin-top:12px}
+  .seek{margin-top:10px}
+  .links{margin-top:12px}
+  .mail{margin-top:6px}
 }
 /* stage */
 .stage{position:relative;width:100%;max-width:1150px;aspect-ratio:1000/800;justify-self:center}
@@ -66,14 +81,14 @@ a{color:inherit}
 .tile i{white-space:nowrap;font-style:normal;font-family:var(--mono);font-size:clamp(6.5px,.62vw,10px);letter-spacing:.06em;text-transform:uppercase;color:#555}
 .tile.soon{border-style:dashed}
 .deco{position:absolute;pointer-events:none;font-family:var(--hand);color:var(--ink)}
-.hint{left:0;top:12%;transform:rotate(-8deg);font-size:clamp(16px,2vw,30px);line-height:1.05;text-align:center;opacity:0;animation:fade 1s 1.6s forwards}
+.hint{left:0;top:10%;transform:rotate(-8deg);font-size:clamp(16px,2vw,30px);line-height:1.05;text-align:center;opacity:0;animation:fade 1s 1.6s forwards}
 .cv{position:absolute;left:91.5%;top:13%;transform:translate(-50%,-50%);width:9%;aspect-ratio:.78;border:2px solid #ddd;border-radius:10px;background:#141414;cursor:pointer;transition:transform .3s;display:block;opacity:0;animation:tileIn .7s 1.4s forwards}
 .cv:hover,.cv:focus-visible{transform:translate(-50%,-50%) scale(1.15);outline:none}
 .cv span{position:absolute;left:12%;right:12%;height:3%;background:#444;border-radius:2px}
 .cvlab{left:91.5%;top:27%;transform:translateX(-50%);font-size:clamp(14px,1.8vw,28px);white-space:nowrap;text-align:center}
 .cvlab .opts{display:block;margin-top:4px;font:clamp(10px,.9vw,13px) var(--mono);color:var(--ink2);pointer-events:auto}
 .cvlab .opts a{color:var(--ink2);text-underline-offset:3px}.cvlab .opts a:hover{color:var(--gold)}
-.arrowL{position:absolute;left:-1%;top:29%;width:13%;pointer-events:none;opacity:0;animation:fade 1s 1.7s forwards}
+.arrowL{position:absolute;left:1%;top:1%;width:13%;pointer-events:none;opacity:0;animation:fade 1s 1.7s forwards}
 /* drawer */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s;z-index:40}
 .scrim.on{opacity:1;pointer-events:auto}
@@ -187,7 +202,7 @@ $('hello').innerHTML=SITE.hello.map(function(l){return '<span>'+esc(l)+'</span>'
 $('sub').textContent=SITE.sub; $('ket').textContent=SITE.ket;
 $('name').textContent=SITE.name; $('seek').textContent=SITE.seeking; $('notice').textContent=(!SITE.noticeUntil||new Date()<new Date(SITE.noticeUntil))?SITE.notice:'';
 if(SITE.headshot){$('photo').innerHTML='<img src="'+esc(SITE.headshot)+'" alt="'+esc(SITE.name)+'">';}
-$('links').innerHTML=[['Email','mailto:'+SITE.email],['Short CV',SITE.cv],['Full CV',SITE.cvFull],['Google Scholar',SITE.scholar],['LinkedIn',SITE.linkedin]].map(function(l){var ext=/^https?:/.test(l[1]);return '<a href="'+esc(l[1])+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+l[0]+'</a>';}).join('');
+$('links').innerHTML=[['Short CV',SITE.cv],['Full CV',SITE.cvFull],['Google Scholar',SITE.scholar],['LinkedIn',SITE.linkedin]].map(function(l){var ext=/^https?:/.test(l[1]);return '<a href="'+esc(l[1])+'"'+(ext?' target="_blank" rel="noopener"':'')+'>'+l[0]+'</a>';}).join('');
 $('mail').innerHTML='<a href="mailto:'+esc(SITE.email)+'">'+esc(SITE.email)+'</a>';
 $('cvlink').href=SITE.cv;$('cvShort').href=SITE.cv;$('cvFull').href=SITE.cvFull;
 var cv=$('cvlink'); for(var i=0;i<9;i++){var s=document.createElement('span');s.style.top=(12+i*8.5)+'%';s.style.right=(12+(i%3)*10)+'%';cv.appendChild(s);}
@@ -249,10 +264,10 @@ addEventListener('keydown',function(e){if(e.key==='Escape'&&dr.classList.contain
 
 /* papers */
 var PUBS=[
- ['Can a Neural Encoding Model Replicate an fMRI Visualization Study?','E. Nasirzadeh Orang, Z. While','VISxVISION Workshop at IEEE VIS 2026 · arXiv:2609.15685','https://arxiv.org/abs/2609.15685'],
- ['Optical feedback from biological photonic structures supporting ASE and laser emission','N. J. Dawson, H. Liu, A. Fiorito III, D. R. Sheffield, B. Bish, E. Nasirzadeh Orang, R. Robinson, M. Giron, M. Crescimanno','Proc. SPIE 14207, Light in Nature 2026, 142070A','https://doi.org/10.1117/12.3112389'],
+ ['Can a Neural Encoding Model Replicate an fMRI Visualization Study?','E. Nasirzadeh Orang, Z. While','Presented at the VISxVISION Workshop, IEEE VIS 2026, Boston · arXiv:2609.15685','https://arxiv.org/abs/2609.15685'],
+ ['Optical feedback from biological photonic structures supporting ASE and laser emission','N. J. Dawson, H. Liu, A. Fiorito, D. R. Sheffield, B. Bish, E. Nasirzadeh Orang, R. Robinson, M. Giron, M. Crescimanno','Proc. SPIE 14207, Light in Nature 2026, 142070A','https://doi.org/10.1117/12.3112389'],
  ['Machine learning surrogates for Al₂O₃–TiO₂/water hybrid nanofluid battery thermal management under variable heat generation','A. Ulus, I. Uluocak, E. Nasirzadeh Orang, N. Vakili, K. Choo','Journal of Thermal Analysis and Calorimetry 151(21), 18703–18721 (2026)','https://doi.org/10.1007/s10973-026-16179-8'],
- ['Operating-regime dependence of turbulence effects on an H-type Darrieus vertical-axis wind turbine using uncertainty-aware surrogate modeling','A. Ulus, I. Uluocak, E. Nasirzadeh Orang, N. Vakili, K. Choo','Part A: Journal of Power and Energy · accepted',''],
+ ['Operating-regime dependence of turbulence effects on an H-type Darrieus vertical-axis wind turbine using uncertainty-aware surrogate modeling','A. Ulus, I. Uluocak, E. Nasirzadeh Orang, N. Vakili, K. Choo','Proc. IMechE Part A: Journal of Power and Energy · online first, Nov 2026','https://doi.org/10.1177/09576509261508217'],
  ['Spectral fingerprint of laser emission from rhodamine 6g infused male Indian Peafowl tail feathers','A. Fiorito III, D. R. Sheffield, H. Liu, E. Nasirzadeh Orang, N. J. Dawson','Scientific Reports 15, 20938 (2025)','https://doi.org/10.1038/s41598-025-04039-8'],
  ['Chirp asymmetry in Zeeman electromagnetically induced transparency','J. Gorkos, K. Grenzig, E. Nasirzadeh Orang, V. Thomas, D. Tighe, M. Crescimanno','JOSA B 42(2), 404–411 (2025)','https://doi.org/10.1364/JOSAB.544782']
 ];
@@ -264,9 +279,19 @@ $('pubs').innerHTML=PUBS.map(function(p){return '<li><b class="t">'+esc(p[0])+'<
    scrolling is normal. */
 (function(){
   var desk=matchMedia('(min-width:861px)'), still=matchMedia('(prefers-reduced-motion: reduce)');
-  var more=document.querySelector('.more'), busy=false;
+  var page=document.querySelector('.page'), more=document.querySelector('.more'), busy=false, DUR=1000;
   function top2(){return Math.round(more.getBoundingClientRect().top+scrollY);}
-  function go(y){busy=true;scrollTo({top:y,behavior:still.matches?'auto':'smooth'});setTimeout(function(){busy=false;},900);}
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+  /* our own eased scroll (slower than the browser's) plus a fade between the two sections */
+  function go(y){
+    busy=true;
+    if(still.matches){scrollTo({top:y,behavior:'instant'});setTimeout(function(){busy=false;},300);return;}
+    var from=y>0?page:more, to=y>0?more:page, y0=scrollY, t0=performance.now();
+    from.classList.add('leaving'); to.classList.remove('entering'); void to.offsetWidth; to.classList.add('entering');
+    (function frame(now){var k=Math.min(1,(now-t0)/DUR);scrollTo({top:y0+(y-y0)*ease(k),behavior:'instant'});
+      if(k<1)requestAnimationFrame(frame);
+      else{from.classList.remove('leaving');setTimeout(function(){to.classList.remove('entering');busy=false;},150);}})(t0);
+  }
   /* dy: how far this scroll would move. Going up across the papers' top edge glides to the Venn page. */
   function step(dy){
     var t=top2(), y=scrollY;
